@@ -2,6 +2,9 @@
   "name": "zhangjiachang-website",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "overrides": {
     "@tanstack/react-virtual": "3.11.3",
     "@tanstack/virtual-core": "3.11.3"
@@ -18,15 +21,15 @@
     "@sanity/image-url": "^1.1.0",
     "@mdx-js/loader": "^3.1.1",
     "@mdx-js/react": "^3.1.1",
-    "@next/mdx": "^16.1.6",
+    "@next/mdx": "^15.1.11",
     "@tailwindcss/typography": "^0.5.19",
     "@types/mdx": "^2.0.13",
     "gray-matter": "^4.0.3",
-    "next": "16.1.6",
+    "next": "15.1.11",
     "next-sanity": "^9.9.0",
     "next-themes": "^0.4.6",
-    "react": "19.2.3",
-    "react-dom": "19.2.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^4.0.1",
     "remark-mdx-frontmatter": "^5.2.0",
@@ -36,10 +39,10 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
     "eslint": "^9",
-    "eslint-config-next": "16.1.6",
+    "eslint-config-next": "15.1.11",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
