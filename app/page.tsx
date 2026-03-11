@@ -5,6 +5,7 @@ export const revalidate = 60;
 import { ProjectCard } from "@/components/ProjectCard";
 import { BlogPostCard } from "@/components/BlogPostCard";
 import { FadeUpSection } from "@/components/FadeUpSection";
+import { HomeDevNewPost } from "@/components/HomeDevNewPost";
 
 export default async function Home() {
   const [featuredWork, latestPosts] = await Promise.all([
@@ -85,14 +86,17 @@ export default async function Home() {
               </li>
             ))}
           </ul>
-          {latestPosts.length > 0 && (
-            <Link
-              href="/blog"
-              className="mt-8 inline-block text-[var(--fg-muted)] transition-colors duration-500 hover:text-[var(--accent)]"
-            >
-              View all articles →
-            </Link>
-          )}
+          <div className="mt-8 flex flex-wrap items-center gap-4">
+            {latestPosts.length > 0 && (
+              <Link
+                href="/blog"
+                className="inline-block text-[var(--fg-muted)] transition-colors duration-500 hover:text-[var(--accent)]"
+              >
+                View all articles →
+              </Link>
+            )}
+            <HomeDevNewPost />
+          </div>
         </div>
       </FadeUpSection>
 

@@ -32,12 +32,10 @@ export function DeveloperModeProvider({
   children: React.ReactNode;
 }) {
   const [isDevMode, setIsDevMode] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [wrongPassword, setWrongPassword] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     const saved = localStorage.getItem(DEV_MODE_KEY);
     setIsDevMode(saved === "true");
   }, []);
@@ -91,12 +89,9 @@ export function DeveloperModeProvider({
     return () => window.removeEventListener("keydown", handler);
   }, [toggleDevMode]);
 
-  if (!mounted) {
-    return <>{children}</>;
-  }
-
+  const contextValue = { isDevMode, toggleDevMode };
   return (
-    <DeveloperModeContext.Provider value={{ isDevMode, toggleDevMode }}>
+    <DeveloperModeContext.Provider value={contextValue}>
       {children}
       {showPasswordModal && (
         <DevModePasswordModal
@@ -188,9 +183,9 @@ function DevModePasswordModal({
 }
 
 export function DeveloperModeToggle() {
-  const { isDevMode, toggleDevMode } = useDeveloperMode() ?? {};
-
-  if (!useDeveloperMode()) return null;
+  const ctx = useDeveloperMode();
+  if (!ctx) return null;
+  const { isDevMode, toggleDevMode } = ctx;
 
   return (
     <button
@@ -226,7 +221,7 @@ export function DeveloperModeBanner() {
   if (!isDevMode) return null;
 
   return (
-    <div className="sticky top-16 z-40 flex items-center justify-center gap-2 border-b border-[var(--accent)] bg-[var(--accent)]/10 py-2 text-xs font-medium text-[var(--accent)]">
+    <div className="sticky top-11 z-40 flex items-center justify-center gap-2 border-b border-[var(--accent)] bg-[var(--accent)]/10 py-2 text-xs font-medium text-[var(--accent)]">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="14"
