@@ -4,6 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { ThemeToggle } from "./ThemeToggle";
+import { useDeveloperMode } from "./DeveloperMode";
+import { getGitHubNewBlogUrl } from "@/lib/site-config";
 
 const navLinks = [
   { href: "/work", label: "Work" },
@@ -15,6 +17,7 @@ const navLinks = [
 export function Navigation() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { isDevMode } = useDeveloperMode() ?? {};
 
   return (
     <header
@@ -40,16 +43,26 @@ export function Navigation() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-medium transition-colors hover:text-[var(--accent)] ${
+                className={`text-sm font-medium transition-colors ${
                   isActive
                     ? "text-[var(--accent)] underline decoration-[var(--accent)] underline-offset-4"
-                    : "text-[var(--fg-muted)]"
+                    : "text-[var(--fg-muted)] hover:text-[var(--accent)]"
                 }`}
               >
                 {link.label}
               </Link>
             );
           })}
+          {isDevMode && (
+            <a
+              href={getGitHubNewBlogUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full bg-[var(--accent)] px-4 py-1.5 text-sm font-medium text-white hover:opacity-90"
+            >
+              Write
+            </a>
+          )}
           <ThemeToggle />
         </div>
 
@@ -123,6 +136,17 @@ export function Navigation() {
                 </Link>
               );
             })}
+            {isDevMode && (
+              <a
+                href={getGitHubNewBlogUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileOpen(false)}
+                className="text-2xl font-medium text-[var(--accent)]"
+              >
+                Write
+              </a>
+            )}
           </div>
         </div>
       )}

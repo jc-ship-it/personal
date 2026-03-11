@@ -5,7 +5,6 @@ const contactLinks = [
   { label: "Email", href: `mailto:${contact.email}`, value: contact.email },
   { label: "LinkedIn", href: contact.linkedin, value: contact.linkedin.replace(/^https?:\/\//, "").replace(/\/$/, "") },
   { label: "GitHub", href: contact.github, value: contact.github.replace(/^https?:\/\//, "").replace(/\/$/, "") },
-  { label: "Twitter / X", href: contact.twitter, value: contact.twitter.replace(/^https?:\/\//, "").replace(/\/$/, "") },
 ];
 
 export default function ContactPage() {

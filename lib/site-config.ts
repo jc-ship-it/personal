@@ -4,13 +4,47 @@ export const contact = siteConfig.contact as {
   email: string;
   linkedin: string;
   github: string;
-  twitter: string;
+};
+
+export const bio = siteConfig.bio as {
+  tagline: string;
+  paragraph1: string;
+  paragraph2: string;
 };
 
 export const timeline = siteConfig.timeline as Array<{
-  year: string;
+  period: string;
   role: string;
-  company: string;
+  org: string;
+  location: string;
+  highlight: string;
+  current: boolean;
+}>;
+
+export const education = siteConfig.education as Array<{
+  period: string;
+  degree: string;
+  field: string;
+  school: string;
+  department?: string;
+  gpa?: string;
+  note?: string;
+}>;
+
+export const volunteer = siteConfig.volunteer as Array<{
+  period: string;
+  role: string;
+  org: string;
+  school: string;
+  duration: string;
+}>;
+
+export const certifications = siteConfig.certifications as Array<{
+  name: string;
+  issuer: string;
+  issued: string;
+  validUntil: string;
+  certNo: string;
 }>;
 
 export const GITHUB_REPO = "jc-ship-it/personal";

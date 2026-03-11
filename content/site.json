@@ -1,13 +1,90 @@
 {
   "contact": {
-    "email": "zhangjiachang@u.edu.nus",
+    "email": "zhangjiachang@u.nus.edu",
     "linkedin": "https://linkedin.com/in/zhangjiachang",
-    "github": "https://github.com/zhangjiachang",
-    "twitter": "/"
+    "github": "https://github.com/zhangjiachang"
+  },
+  "bio": {
+    "tagline": "Interaction Designer based in Shenzhen.",
+    "paragraph1": "Currently shaping AI-driven personalization experiences at OPPO (ColorOS), across OPPO, OnePlus, and realme globally. NUS MDes graduate. Previously explored spatial design, industrial design, and fine art.",
+    "paragraph2": "Designing at the intersection of mobile OS, generative AI, and human expression."
   },
   "timeline": [
-    { "year": "2025", "role": "Interaction Designer", "company": "OPPO" },
-    { "year": "2024", "role": "Master", "company": "National University of Singapore" },
-    { "year": "2020", "role": "Bachelor", "company": "Jiangnan Univeristy" }
+    {
+      "period": "2025.07 — Present",
+      "role": "Interaction Designer",
+      "org": "OPPO",
+      "location": "Shenzhen",
+      "highlight": "Lead AI-powered personalization design for ColorOS across OPPO, OnePlus, and realme. Spearhead AI tool integration for the Design Department.",
+      "current": true
+    },
+    {
+      "period": "2025.01 — 2025.03",
+      "role": "3D Interactive Designer (RA)",
+      "org": "NUS College of Design & Engineering",
+      "location": "Singapore",
+      "highlight": "Research on generative AI and spatial design in NUS 3D Interactive Lab.",
+      "current": false
+    },
+    {
+      "period": "2024.02 — 2024.04",
+      "role": "Industrial Design Intern",
+      "org": "Forvia (Faurecia)",
+      "location": "Shanghai",
+      "highlight": "Automotive interior design exploration.",
+      "current": false
+    },
+    {
+      "period": "2023.12 — 2024.02",
+      "role": "UI/UX Design Intern",
+      "org": "Aita Technology",
+      "location": "Hangzhou",
+      "highlight": "Product interface design for early-stage tech company.",
+      "current": false
+    },
+    {
+      "period": "2023.09 — 2023.12",
+      "role": "IELTS Writing Teacher Intern",
+      "org": "New Oriental Education",
+      "location": "Wuxi",
+      "highlight": "Taught IELTS Writing to exam candidates. A detour from design — but proof of versatility and communication skills.",
+      "current": false
+    }
+  ],
+  "education": [
+    {
+      "period": "2024 — 2025",
+      "degree": "Master of Design (MDes)",
+      "field": "Integrated Design",
+      "school": "National University of Singapore",
+      "department": "Division of Industrial Design, College of Design & Engineering",
+      "note": "CSC Scholarship"
+    },
+    {
+      "period": "2020 — 2024",
+      "degree": "Bachelor of Arts (BA)",
+      "field": "Public Art & Fine Art",
+      "school": "Jiangnan University",
+      "gpa": "88.23 / 100",
+      "note": "Xiaoshan Scholarship"
+    }
+  ],
+  "volunteer": [
+    {
+      "period": "2020.10 — 2022.06",
+      "role": "Staff",
+      "org": "Design School Youth Volunteer Association",
+      "school": "Jiangnan University",
+      "duration": "1 year 9 months"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Social and Behavioral Research - Basic/Refresher",
+      "issuer": "CITI Program",
+      "issued": "Aug 2024",
+      "validUntil": "Aug 2029",
+      "certNo": "64358196"
+    }
   ]
 }

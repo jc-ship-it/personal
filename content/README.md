@@ -5,9 +5,10 @@
 Edit `site.json` to update:
 
 - **contact**: Email, LinkedIn, GitHub, Twitter URLs
-- **timeline**: Your experience (year, role, company) — sync with your LinkedIn
+- **bio**: Tagline and intro paragraphs for About page
+- **timeline**: Career (period, role, org, location, highlight, current)
+- **education**: Degree, school, field, etc.
 
-Timeline format:
-```json
-{ "year": "2024", "role": "Your Title", "company": "Company Name" }
-```
+## Avatar
+
+Place your photo at `public/images/avatar.jpg`. If missing, a placeholder is shown.
