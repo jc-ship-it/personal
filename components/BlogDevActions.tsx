@@ -1,17 +1,15 @@
 "use client";
 
+import Link from "next/link";
 import { useDeveloperMode } from "./DeveloperMode";
-import { getGitHubNewBlogUrl } from "@/lib/site-config";
 
 export function BlogDevActions() {
   const { isDevMode } = useDeveloperMode() ?? {};
   if (!isDevMode) return null;
 
   return (
-    <a
-      href={getGitHubNewBlogUrl()}
-      target="_blank"
-      rel="noopener noreferrer"
+    <Link
+      href="/studio"
       className="mb-12 flex items-center gap-4 rounded-xl border-2 border-dashed border-[var(--accent)] bg-[var(--accent)]/5 p-6 transition-colors hover:border-[var(--accent)] hover:bg-[var(--accent)]/10"
     >
       <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[var(--accent)]/20">
@@ -33,9 +31,9 @@ export function BlogDevActions() {
       <div>
         <p className="font-semibold text-[var(--fg)]">Write New Post</p>
         <p className="text-sm text-[var(--fg-muted)]">
-          Create a new blog post in GitHub →
+          Create a new blog post in Sanity Studio →
         </p>
       </div>
-    </a>
+    </Link>
   );
 }
