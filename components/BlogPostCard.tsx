@@ -12,7 +12,7 @@ export function BlogPostCard({ title, excerpt, date, slug, tags }: BlogPostCardP
   return (
     <Link
       href={`/blog/${slug}`}
-      className="group block border-b border-[var(--border)] py-8 transition-colors first:pt-0 last:border-b-0 hover:text-[var(--accent)]"
+      className="group block py-8 transition-colors duration-500 first:pt-0 hover:text-[var(--accent)]"
     >
       <h3 className="font-medium text-[var(--fg)] group-hover:text-[var(--accent)]">
         {title}
@@ -35,7 +35,7 @@ export function BlogPostCard({ title, excerpt, date, slug, tags }: BlogPostCardP
         {tags?.map((tag) => (
           <span
             key={tag}
-            className="rounded-full border border-[var(--border)] px-2 py-0.5 text-xs text-[var(--fg-muted)]"
+            className="rounded-full bg-[var(--border)]/50 px-2 py-0.5 text-xs text-[var(--fg-muted)]"
           >
             {tag}
           </span>

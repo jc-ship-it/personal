@@ -19,7 +19,7 @@ export function ProjectCard({
   return (
     <Link
       href={`/work/${slug}`}
-      className="group overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--card-bg)] transition-all duration-200 hover:scale-[1.02] hover:brightness-95 dark:hover:brightness-110"
+      className="group block overflow-hidden rounded-2xl bg-[var(--card-bg)] transition-[transform,opacity] duration-500 hover:scale-[1.02] hover:opacity-90"
     >
       <div className="aspect-video flex items-center justify-center bg-neutral-100 p-8 dark:bg-neutral-800">
         {image ? (
@@ -44,7 +44,7 @@ export function ProjectCard({
             {tags.map((tag) => (
               <span
                 key={tag}
-                className="rounded-full border border-[var(--border)] px-2 py-0.5 text-xs text-[var(--fg-muted)]"
+                className="rounded-full bg-[var(--border)]/50 px-2 py-0.5 text-xs text-[var(--fg-muted)]"
               >
                 {tag}
               </span>

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ThemeToggle } from "./ThemeToggle";
 import { useDeveloperMode } from "./DeveloperMode";
 
@@ -16,17 +16,28 @@ const navLinks = [
 export function Navigation() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const { isDevMode } = useDeveloperMode() ?? {};
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <header
-      className="fixed left-0 right-0 top-0 z-50 border-b border-[var(--border)] bg-white/80 backdrop-blur-md dark:bg-black/80"
-      style={{ transition: "background-color 200ms" }}
+      data-scrolled={scrolled}
+      className={`fixed left-0 right-0 top-0 z-50 border-b transition-all duration-500 ${
+        scrolled
+          ? "border-[var(--border)] bg-white/80 backdrop-blur-xl dark:bg-black/80"
+          : "border-transparent bg-transparent backdrop-blur-none"
+      }`}
     >
-      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
+      <nav className="mx-auto flex h-11 max-w-6xl items-center justify-between px-6">
         <Link
           href="/"
-          className="text-lg font-semibold tracking-tight text-[var(--fg)] hover:text-[var(--accent)]"
+          className="text-sm font-normal text-[var(--fg)] transition-colors duration-500 hover:text-[var(--accent)]"
           onClick={() => setMobileOpen(false)}
         >
           Zhang Jiachang
@@ -42,9 +53,9 @@ export function Navigation() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-medium transition-colors ${
+                className={`text-sm font-normal transition-colors duration-500 ${
                   isActive
-                    ? "text-[var(--accent)] underline decoration-[var(--accent)] underline-offset-4"
+                    ? "text-[var(--fg)] underline decoration-[var(--fg)] decoration-1 underline-offset-4"
                     : "text-[var(--fg-muted)] hover:text-[var(--accent)]"
                 }`}
               >
@@ -110,7 +121,7 @@ export function Navigation() {
       {/* Mobile nav overlay */}
       {mobileOpen && (
         <div
-          className="fixed inset-0 top-16 bg-[var(--bg)] md:hidden"
+          className="fixed inset-0 top-11 bg-[var(--bg)] md:hidden"
           onClick={() => setMobileOpen(false)}
         >
           <div className="flex flex-col gap-6 px-8 py-12">

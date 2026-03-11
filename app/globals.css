@@ -2,22 +2,23 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  --bg: #fafafa;
-  --fg: #0a0a0a;
-  --fg-muted: #737373;
-  --accent: #5856d6;
-  --border: #e5e5e5;
-  --card-bg: #ffffff;
-  --transition-duration: 200ms;
+  --bg: #fbfbfd;
+  --fg: #1d1d1f;
+  --fg-muted: #86868b;
+  --accent: #2997ff;
+  --border: rgb(0 0 0 / 0.08);
+  --card-bg: #f5f5f7;
+  --transition-duration: 500ms;
 }
 
 .dark {
-  --bg: #0a0a0a;
-  --fg: #fafafa;
-  --fg-muted: #a3a3a3;
-  --accent: #5856d6;
-  --border: #262626;
-  --card-bg: #171717;
+  --bg: #000000;
+  --fg: #f5f5f7;
+  --fg-muted: #86868b;
+  --accent: #2997ff;
+  --border: rgb(255 255 255 / 0.08);
+  --card-bg: #1d1d1f;
+  --transition-duration: 500ms;
 }
 
 @theme inline {
@@ -27,8 +28,8 @@
   --color-accent: var(--accent);
   --color-border: var(--border);
   --color-card-bg: var(--card-bg);
-  --font-sans: var(--font-outfit), "PingFang SC", "Noto Sans SC", sans-serif;
-  --font-mono: var(--font-geist-mono);
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Noto Sans SC", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Consolas", monospace;
 }
 
 body {
@@ -41,7 +42,7 @@ body {
 @keyframes heroFadeIn {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;

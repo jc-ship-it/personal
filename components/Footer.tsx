@@ -6,9 +6,9 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-[var(--border)] py-8">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6">
-        <p className="text-sm text-[var(--fg-muted)]">
+    <footer className="py-6">
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6">
+        <p className="text-xs text-neutral-500">
           © {year} Zhang Jiachang. All rights reserved.
         </p>
         <DeveloperModeToggle />
