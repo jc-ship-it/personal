@@ -10,7 +10,6 @@ import {
 } from "react";
 
 const DEV_MODE_KEY = "zhangjiachang-dev-mode";
-const DEV_MODE_PASSWORD = (process.env.NEXT_PUBLIC_DEV_MODE_PASSWORD ?? "").trim();
 
 interface DeveloperModeContextType {
   isDevMode: boolean;
@@ -63,17 +62,27 @@ export function DeveloperModeProvider({
   }, [isDevMode, disableDevMode]);
 
   const handlePasswordSubmit = useCallback(
-    (password: string) => {
-      const trimmed = password.trim();
-      if (!DEV_MODE_PASSWORD) {
-        setConfigError(true);
-        return;
-      }
+    async (password: string) => {
       setConfigError(false);
-      if (trimmed === DEV_MODE_PASSWORD) {
-        enableDevMode();
-      } else {
-        setWrongPassword(true);
+      setWrongPassword(false);
+      try {
+        const res = await fetch("/api/dev-mode", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ password: password.trim() }),
+        });
+        const data = await res.json();
+        if (res.status === 503 && data.error === "not_configured") {
+          setConfigError(true);
+          return;
+        }
+        if (data.ok) {
+          enableDevMode();
+        } else {
+          setWrongPassword(true);
+        }
+      } catch {
+        setConfigError(true);
       }
     },
     [enableDevMode]
@@ -116,7 +125,7 @@ function DevModePasswordModal({
   wrongPassword,
   configError,
 }: {
-  onSubmit: (password: string) => void;
+  onSubmit: (password: string) => void | Promise<void>;
   onClose: () => void;
   wrongPassword?: boolean;
   configError?: boolean;
@@ -158,7 +167,7 @@ function DevModePasswordModal({
         )}
         {configError && (
           <p className="mt-2 text-sm text-amber-600 dark:text-amber-400">
-            NEXT_PUBLIC_DEV_MODE_PASSWORD 未配置，请在 .env.local 或 Vercel 环境变量中设置
+            DEV_MODE_PASSWORD 未配置，请在 .env.local 或 Vercel 环境变量中设置（无需 NEXT_PUBLIC_ 前缀）
           </p>
         )}
         <form onSubmit={handleSubmit} className="mt-4">
