@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { ThemeToggle } from "./ThemeToggle";
 import { useDeveloperMode } from "./DeveloperMode";
-import { getGitHubNewBlogUrl } from "@/lib/site-config";
 
 const navLinks = [
   { href: "/work", label: "Work" },
@@ -54,14 +53,12 @@ export function Navigation() {
             );
           })}
           {isDevMode && (
-            <a
-              href={getGitHubNewBlogUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/studio"
               className="rounded-full bg-[var(--accent)] px-4 py-1.5 text-sm font-medium text-white hover:opacity-90"
             >
-              Write
-            </a>
+              Studio
+            </Link>
           )}
           <ThemeToggle />
         </div>
@@ -137,15 +134,13 @@ export function Navigation() {
               );
             })}
             {isDevMode && (
-              <a
-                href={getGitHubNewBlogUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/studio"
                 onClick={() => setMobileOpen(false)}
                 className="text-2xl font-medium text-[var(--accent)]"
               >
-                Write
-              </a>
+                Studio
+              </Link>
             )}
           </div>
         </div>

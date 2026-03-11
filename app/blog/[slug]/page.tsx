@@ -1,9 +1,13 @@
 import Link from "next/link";
-import { getBlogSlugs, getBlogPosts } from "@/lib/content";
+import { getPostBySlug, getPostSlugs } from "@/lib/sanity";
+import { PortableText } from "@/components/PortableText";
 import { notFound } from "next/navigation";
 
+export const revalidate = 60;
+export const dynamicParams = true;
+
 export async function generateStaticParams() {
-  const slugs = await getBlogSlugs();
+  const slugs = await getPostSlugs();
   return slugs.map((slug) => ({ slug }));
 }
 
@@ -13,8 +17,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const posts = await getBlogPosts();
-  const post = posts.find((p) => p.slug === slug);
+  const post = await getPostBySlug(slug);
   if (!post) return { title: "Not Found" };
   return {
     title: `${post.title} — Zhang Jiachang`,
@@ -28,10 +31,8 @@ export default async function BlogDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const slugs = await getBlogSlugs();
-  if (!slugs.includes(slug)) notFound();
-
-  const Post = (await import(`@/content/blog/${slug}.mdx`)).default;
+  const post = await getPostBySlug(slug);
+  if (!post) notFound();
 
   return (
     <div className="mx-auto max-w-[720px] px-6 py-24">
@@ -41,8 +42,35 @@ export default async function BlogDetailPage({
       >
         ← Back to Blog
       </Link>
-      <article className="prose prose-neutral mt-8 dark:prose-invert max-w-none prose-headings:font-semibold prose-a:text-[var(--accent)]">
-        <Post />
+      <article className="mt-8">
+        <h1 className="text-3xl font-semibold tracking-tight text-[var(--fg)]">
+          {post.title}
+        </h1>
+        {post.publishedAt && (
+          <time
+            dateTime={post.publishedAt}
+            className="mt-2 block text-sm text-[var(--fg-muted)]"
+          >
+            {new Date(post.publishedAt).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </time>
+        )}
+        {post.pdfAttachment && (
+          <a
+            href={post.pdfAttachment}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-block font-medium text-[var(--accent)] hover:underline"
+          >
+            Download PDF →
+          </a>
+        )}
+        <div className="mt-8">
+          <PortableText value={post.body || []} />
+        </div>
       </article>
     </div>
   );

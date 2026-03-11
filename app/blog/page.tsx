@@ -2,6 +2,8 @@ import { getBlogPosts } from "@/lib/content";
 import { BlogPostCard } from "@/components/BlogPostCard";
 import { BlogDevActions } from "@/components/BlogDevActions";
 
+export const revalidate = 60;
+
 export default async function BlogPage() {
   const posts = await getBlogPosts();
 

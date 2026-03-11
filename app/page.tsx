@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { getFeaturedWork, getLatestPosts } from "@/lib/content";
+
+export const revalidate = 60;
 import { ProjectCard } from "@/components/ProjectCard";
 import { BlogPostCard } from "@/components/BlogPostCard";
 
@@ -56,8 +58,7 @@ export default async function Home() {
           </div>
           {featuredWork.length === 0 && (
             <p className="mt-8 text-[var(--fg-muted)]">
-              Add <code className="rounded bg-neutral-100 px-1.5 py-0.5 dark:bg-neutral-800">featured: true</code> to work in{" "}
-              <code className="rounded bg-neutral-100 px-1.5 py-0.5 dark:bg-neutral-800">content/work/</code>.
+              Add projects in <a href="/studio" className="text-[var(--accent)] hover:underline">Sanity Studio</a> and mark them as featured.
             </p>
           )}
         </div>
