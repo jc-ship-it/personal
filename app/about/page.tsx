@@ -1,4 +1,6 @@
 import { Timeline } from "@/components/Timeline";
+import { timeline, getGitHubEditUrl } from "@/lib/site-config";
+import { DevEditLink } from "@/components/DeveloperMode";
 
 const skills = [
   "Interaction Design",
@@ -20,14 +22,14 @@ export default function AboutPage() {
             About
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-[var(--fg)]">
-            I'm Zhang Jiachang, an interaction designer with a passion for
+            I&apos;m Zhang Jiachang, an interaction designer with a passion for
             creating interfaces that feel inevitable. My work spans mobile
             operating systems, AI-powered products, and design systems that
             scale.
           </p>
           <p className="mt-4 text-lg leading-relaxed text-[var(--fg)]">
             I believe the best design disappears — when an interaction feels so
-            natural that using it becomes second nature. That's the standard I
+            natural that using it becomes second nature. That&apos;s the standard I
             aim for in every project.
           </p>
 
@@ -52,11 +54,16 @@ export default function AboutPage() {
 
       {/* Timeline */}
       <div className="mt-20">
-        <h2 className="text-2xl font-semibold tracking-tight text-[var(--fg)]">
-          Experience
-        </h2>
+        <div className="flex items-center justify-between gap-4">
+          <h2 className="text-2xl font-semibold tracking-tight text-[var(--fg)]">
+            Experience
+          </h2>
+          <DevEditLink href={getGitHubEditUrl("content/site.json")}>
+            Edit timeline
+          </DevEditLink>
+        </div>
         <div className="mt-8">
-          <Timeline />
+          <Timeline data={timeline} />
         </div>
       </div>
 

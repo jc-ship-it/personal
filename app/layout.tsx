@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { DeveloperModeProvider, DeveloperModeBanner } from "@/components/DeveloperMode";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 
@@ -31,11 +32,14 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange={false}
         >
-          <div className="flex min-h-screen flex-col">
-            <Navigation />
-            <main className="flex-1 pt-16">{children}</main>
-            <Footer />
-          </div>
+          <DeveloperModeProvider>
+            <div className="flex min-h-screen flex-col">
+              <Navigation />
+              <DeveloperModeBanner />
+              <main className="flex-1 pt-16">{children}</main>
+              <Footer />
+            </div>
+          </DeveloperModeProvider>
         </ThemeProvider>
       </body>
     </html>

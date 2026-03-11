@@ -1,4 +1,26 @@
 import Link from "next/link";
+import { getBlogSlugs, getBlogPosts } from "@/lib/content";
+import { notFound } from "next/navigation";
+
+export async function generateStaticParams() {
+  const slugs = await getBlogSlugs();
+  return slugs.map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const posts = await getBlogPosts();
+  const post = posts.find((p) => p.slug === slug);
+  if (!post) return { title: "Not Found" };
+  return {
+    title: `${post.title} — Zhang Jiachang`,
+    description: post.excerpt,
+  };
+}
 
 export default async function BlogDetailPage({
   params,
@@ -6,10 +28,10 @@ export default async function BlogDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const title = slug
-    .split("-")
-    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(" ");
+  const slugs = await getBlogSlugs();
+  if (!slugs.includes(slug)) notFound();
+
+  const Post = (await import(`@/content/blog/${slug}.mdx`)).default;
 
   return (
     <div className="mx-auto max-w-[720px] px-6 py-24">
@@ -19,12 +41,9 @@ export default async function BlogDetailPage({
       >
         ← Back to Blog
       </Link>
-      <h1 className="mt-8 text-3xl font-semibold tracking-tight text-[var(--fg)]">
-        {title}
-      </h1>
-      <p className="mt-4 text-[var(--fg-muted)]">
-        Article content coming in Phase 2.
-      </p>
+      <article className="prose prose-neutral mt-8 dark:prose-invert max-w-none prose-headings:font-semibold prose-a:text-[var(--accent)]">
+        <Post />
+      </article>
     </div>
   );
 }
