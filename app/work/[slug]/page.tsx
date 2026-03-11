@@ -1,7 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
-import { getWorkBySlug, getWorkSlugs, urlFor } from "@/lib/sanity";
+import { getWorkBySlug, getWorkSlugs, urlFor } from "@/lib/content";
 import { PortableText } from "@/components/PortableText";
+import type { PortableTextBlock } from "@/lib/sanity";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { notFound } from "next/navigation";
 
 export const revalidate = 60;
@@ -35,6 +38,8 @@ export default async function WorkDetailPage({
   const work = await getWorkBySlug(slug);
   if (!work) notFound();
 
+  const isMdx = "source" in work && work.source === "mdx";
+
   return (
     <div className="mx-auto max-w-4xl px-6 py-24">
       <Link
@@ -52,7 +57,7 @@ export default async function WorkDetailPage({
             {work.description}
           </p>
         )}
-        {work.gallery && work.gallery.length > 0 && (
+        {!isMdx && "gallery" in work && work.gallery && work.gallery.length > 0 && (
           <div className="mt-8 grid gap-6 sm:grid-cols-2">
             {work.gallery.map((img: { _ref?: string }, i: number) => (
               <div key={i} className="overflow-hidden rounded-xl">
@@ -67,11 +72,26 @@ export default async function WorkDetailPage({
             ))}
           </div>
         )}
-        {work.body && work.body.length > 0 && (
-          <div className="mt-10">
-            <PortableText value={work.body} />
+        {isMdx && "image" in work && work.image && (
+          <div className="mt-8">
+            <Image
+              src={work.image}
+              alt={work.title}
+              width={800}
+              height={500}
+              className="h-auto w-full rounded-xl object-cover"
+            />
           </div>
         )}
+        {isMdx && (work.body as string).trim() ? (
+          <div className="mt-10 prose prose-neutral dark:prose-invert max-w-none prose-headings:font-semibold prose-a:text-[var(--accent)] prose-p:text-[var(--fg)] prose-li:text-[var(--fg)]">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>{work.body as string}</ReactMarkdown>
+          </div>
+        ) : !isMdx && (work.body as unknown[])?.length ? (
+          <div className="mt-10">
+            <PortableText value={(work.body || []) as PortableTextBlock[]} />
+          </div>
+        ) : null}
       </article>
     </div>
   );
