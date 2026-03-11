@@ -42,8 +42,9 @@ export const volunteer = siteConfig.volunteer as Array<{
 export const certifications = siteConfig.certifications as Array<{
   name: string;
   issuer: string;
+  score?: string;
   issued: string;
-  validUntil: string;
+  validUntil?: string;
   certNo: string;
 }>;
 

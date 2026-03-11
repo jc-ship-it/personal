@@ -1,8 +1,9 @@
 interface CertificationItem {
   name: string;
   issuer: string;
+  score?: string;
   issued: string;
-  validUntil: string;
+  validUntil?: string;
   certNo: string;
 }
 
@@ -18,10 +19,19 @@ export function Certifications({ data }: CertificationsProps) {
           key={i}
           className="rounded-xl border border-[var(--border)] bg-[var(--card-bg)] p-6"
         >
-          <p className="font-medium text-[var(--fg)]">{item.name}</p>
+          <p className="font-medium text-[var(--fg)]">
+            {item.name}
+            {item.score && (
+              <span className="ml-2 font-semibold text-[var(--accent)]">
+                {item.score}
+              </span>
+            )}
+          </p>
           <p className="mt-1 text-[var(--fg)]">{item.issuer}</p>
           <p className="mt-2 text-sm text-[var(--fg-muted)]">
-            Issued {item.issued} · Valid until {item.validUntil}
+            {item.validUntil
+              ? `Issued ${item.issued} · Valid until ${item.validUntil}`
+              : `Issued ${item.issued}`}
           </p>
           <p className="mt-1 text-xs text-[var(--fg-muted)]">
             Certification No. {item.certNo}

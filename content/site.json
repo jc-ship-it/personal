@@ -65,7 +65,7 @@
       "degree": "Bachelor of Arts (BA)",
       "field": "Public Art & Fine Art",
       "school": "Jiangnan University",
-      "gpa": "88.23 / 100",
+      "gpa": "GPA 88.23 / 100",
       "note": "Xiaoshan Scholarship"
     }
   ],
@@ -79,6 +79,20 @@
     }
   ],
   "certifications": [
+    {
+      "name": "IELTS",
+      "issuer": "British Council",
+      "score": "7.0",
+      "issued": "Aug 2023",
+      "certNo": "23CN062796ZHAJ004A"
+    },
+    {
+      "name": "CET-6 (College English Test Band 6)",
+      "issuer": "Ministry of Education, China",
+      "score": "530",
+      "issued": "Sept 2022",
+      "certNo": "221232201001732"
+    },
     {
       "name": "Social and Behavioral Research - Basic/Refresher",
       "issuer": "CITI Program",
