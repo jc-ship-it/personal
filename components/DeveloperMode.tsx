@@ -10,7 +10,7 @@ import {
 } from "react";
 
 const DEV_MODE_KEY = "zhangjiachang-dev-mode";
-const DEV_MODE_PASSWORD = process.env.NEXT_PUBLIC_DEV_MODE_PASSWORD ?? "";
+const DEV_MODE_PASSWORD = (process.env.NEXT_PUBLIC_DEV_MODE_PASSWORD ?? "").trim();
 
 interface DeveloperModeContextType {
   isDevMode: boolean;
@@ -34,6 +34,7 @@ export function DeveloperModeProvider({
   const [isDevMode, setIsDevMode] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [wrongPassword, setWrongPassword] = useState(false);
+  const [configError, setConfigError] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem(DEV_MODE_KEY);
@@ -45,6 +46,7 @@ export function DeveloperModeProvider({
     localStorage.setItem(DEV_MODE_KEY, "true");
     setShowPasswordModal(false);
     setWrongPassword(false);
+    setConfigError(false);
   }, []);
 
   const disableDevMode = useCallback(() => {
@@ -53,23 +55,22 @@ export function DeveloperModeProvider({
   }, []);
 
   const toggleDevMode = useCallback(() => {
-    setIsDevMode((prev) => {
-      if (prev) {
-        disableDevMode();
-        return false;
-      }
+    if (isDevMode) {
+      disableDevMode();
+    } else {
       setShowPasswordModal(true);
-      return prev;
-    });
-  }, [disableDevMode]);
+    }
+  }, [isDevMode, disableDevMode]);
 
   const handlePasswordSubmit = useCallback(
     (password: string) => {
+      const trimmed = password.trim();
       if (!DEV_MODE_PASSWORD) {
-        setShowPasswordModal(false);
+        setConfigError(true);
         return;
       }
-      if (password === DEV_MODE_PASSWORD) {
+      setConfigError(false);
+      if (trimmed === DEV_MODE_PASSWORD) {
         enableDevMode();
       } else {
         setWrongPassword(true);
@@ -99,8 +100,10 @@ export function DeveloperModeProvider({
           onClose={() => {
             setShowPasswordModal(false);
             setWrongPassword(false);
+            setConfigError(false);
           }}
           wrongPassword={wrongPassword}
+          configError={configError}
         />
       )}
     </DeveloperModeContext.Provider>
@@ -111,10 +114,12 @@ function DevModePasswordModal({
   onSubmit,
   onClose,
   wrongPassword,
+  configError,
 }: {
   onSubmit: (password: string) => void;
   onClose: () => void;
   wrongPassword?: boolean;
+  configError?: boolean;
 }) {
   const [value, setValue] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
@@ -150,6 +155,11 @@ function DevModePasswordModal({
         </p>
         {wrongPassword && (
           <p className="mt-2 text-sm text-red-500">密码错误，请重试</p>
+        )}
+        {configError && (
+          <p className="mt-2 text-sm text-amber-600 dark:text-amber-400">
+            NEXT_PUBLIC_DEV_MODE_PASSWORD 未配置，请在 .env.local 或 Vercel 环境变量中设置
+          </p>
         )}
         <form onSubmit={handleSubmit} className="mt-4">
           <input
