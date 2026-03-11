@@ -1,13 +1,13 @@
 {
   "contact": {
-    "email": "hello@zhangjiachang.com",
+    "email": "zhangjiachang@u.edu.nus",
     "linkedin": "https://linkedin.com/in/zhangjiachang",
     "github": "https://github.com/zhangjiachang",
-    "twitter": "https://x.com/zhangjiachang"
+    "twitter": "/"
   },
   "timeline": [
-    { "year": "2024", "role": "Senior Interaction Designer", "company": "Company A" },
-    { "year": "2022", "role": "Interaction Designer", "company": "Company B" },
-    { "year": "2020", "role": "UI Designer", "company": "Company C" }
+    { "year": "2025", "role": "Interaction Designer", "company": "OPPO" },
+    { "year": "2024", "role": "Master", "company": "National University of Singapore" },
+    { "year": "2020", "role": "Bachelor", "company": "Jiangnan Univeristy" }
   ]
 }
