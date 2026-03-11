@@ -19,20 +19,20 @@ export default function AboutPage() {
     <div className="mx-auto max-w-[720px] px-6 py-24">
       {/* Hero: Avatar + Bio */}
       <FadeInSection>
-        <div className="flex flex-col gap-12 md:flex-row md:gap-16">
+        <div className="flex flex-col gap-12 md:flex-row md:items-start md:gap-16">
           <Avatar />
-          <div className="flex-1">
+          <div className="flex-1 min-w-0">
             <h1 className="text-3xl font-semibold tracking-tight text-[var(--fg)]">
               About
             </h1>
-            <p className="mt-6 text-lg font-medium text-[var(--fg)]">
+            <p className="mt-6 text-xl font-medium leading-snug text-[var(--fg)]">
               {bio.tagline}
             </p>
-            <p className="mt-4 text-lg leading-relaxed text-[var(--fg)]">
+            <p className="mt-6 text-[17px] leading-[1.75] text-[var(--fg)]">
               {bio.paragraph1}
             </p>
-            <p className="mt-4 text-lg leading-relaxed text-[var(--fg)]">
-              <strong>{bio.paragraph2}</strong>
+            <p className="mt-5 text-[17px] leading-[1.75] text-[var(--fg)] border-l-2 border-[var(--accent)] pl-5 italic">
+              {bio.paragraph2}
             </p>
           </div>
         </div>

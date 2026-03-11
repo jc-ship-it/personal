@@ -17,7 +17,7 @@ export function Avatar() {
   return (
     <div className="relative aspect-square w-full max-w-[280px] shrink-0 overflow-hidden rounded-xl bg-neutral-200 dark:bg-neutral-800">
       <Image
-        src="/images/avatar.jpg"
+        src="/images/avatar.png"
         alt="Zhang Jiachang"
         width={280}
         height={280}
