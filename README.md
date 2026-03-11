@@ -32,6 +32,8 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Phases
 
+See [docs/PLAN.md](docs/PLAN.md) for the full development plan.
+
 1. **Phase 1**: Home, About, Contact, navigation, dark/light mode, responsive
 2. **Phase 2**: Blog & Work (MDX), content rendering
 3. **Phase 3**: Admin panel (GitHub API, image upload)
