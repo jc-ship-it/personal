@@ -14,18 +14,15 @@ export async function POST(req: Request) {
     const body = await req.json();
     const type = body._type;
 
+    const slug = body.slug?.current ?? body.slug; // support {slug} or {slug: {current}}
     if (type === "post") {
       revalidatePath("/blog");
       revalidatePath("/");
-      if (body.slug?.current) {
-        revalidatePath(`/blog/${body.slug.current}`);
-      }
+      if (slug) revalidatePath(`/blog/${slug}`);
     } else if (type === "work") {
       revalidatePath("/work");
       revalidatePath("/");
-      if (body.slug?.current) {
-        revalidatePath(`/work/${body.slug.current}`);
-      }
+      if (slug) revalidatePath(`/work/${slug}`);
     }
 
     return NextResponse.json({ revalidated: true });

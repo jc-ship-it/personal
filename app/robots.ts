@@ -1,5 +1,7 @@
 import { MetadataRoute } from "next";
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zhangjiachang.com";
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
@@ -7,5 +9,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/", "/studio"],
     },
+    sitemap: `${baseUrl}/sitemap.xml`,
   };
 }
