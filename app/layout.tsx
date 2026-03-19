@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { DeveloperModeProvider, DeveloperModeBanner } from "@/components/DeveloperMode";
 import { Navigation } from "@/components/Navigation";
@@ -32,6 +33,7 @@ export default function RootLayout({
               <main className="flex-1 pt-11">{children}</main>
               <Footer />
             </div>
+            <Analytics />
           </DeveloperModeProvider>
         </ThemeProvider>
       </body>
